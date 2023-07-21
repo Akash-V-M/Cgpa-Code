@@ -1,0 +1,67 @@
+/*This file does not contain any copyrighted code*/
+import java.util.*;
+class CalcGpa {
+		public int SubNo;
+		public int[] points;
+		public float[] Cred;
+		public int SemNo;
+		public float[] SGPA;
+		
+		public CalcGpa(int Sn, int[] p, float[] c, int SemNo, float[] SGPA) {
+			this.SubNo = Sn;
+			this.points = p;
+			this.Cred = c;
+			this.SemNo = SemNo;
+			this.SGPA = SGPA;
+		}
+		
+		public void Cal() {
+			float Nu=0, De=0, GPA, tSGPA=0, CGPA;
+			for(int i=0; i<SubNo; i++ ) {
+				Nu = Nu + (float)(points[i]*Cred[i]);
+				De = De + Cred[i];
+			}
+			GPA = Nu / De;
+			System.out.println("SGPA : "+GPA);
+			for(int i=0; i<SemNo; i++){
+			    tSGPA = tSGPA + SGPA[i];
+			}
+			CGPA = (tSGPA+GPA )/( SemNo+ 1);
+			System.out.println("CGPA : "+CGPA);
+		}
+	}
+class Main{
+		public static void main(String[] args) {
+			Scanner scan = new Scanner(System.in);
+			System.out.print("Enter Your Name: ");
+			String Name = scan.nextLine();
+			System.out.print("How many Subjects do you have: ");
+			int SubNo = scan.nextInt();
+			scan.nextLine();
+			System.out.print("Input your grade points as per your grading system : ");
+			int[] grades = new int[SubNo];
+			for(int i=0; i<SubNo; i++) {
+				grades[i] = scan.nextInt();
+			}
+			scan.nextLine();
+			System.out.print("Input credits in the same order as grades : ");
+			float[] credit = new float[SubNo];
+			for(int i=0; i<SubNo; i++) {
+				credit[i] = scan.nextFloat();
+			}
+			System.out.print("which Semester? : ");
+			int SemNo = scan.nextInt();
+			int RSNo = SemNo-1;
+			scan.nextLine();
+			System.out.print("Input your previous sem GPAs : ");
+			float[] SGPA = new float[RSNo];
+			for(int i=0; i<RSNo; i++){
+			    SGPA[i] = scan.nextFloat();
+			}
+			CalcGpa cal = new CalcGpa(SubNo, grades, credit, RSNo, SGPA);
+			System.out.println("Name : "+Name);
+			cal.Cal();
+			
+		}
+	}
+	
